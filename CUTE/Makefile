@@ -8,13 +8,13 @@ DEFINEOPTIONS += -D_HAVE_OMP #Comment this out if you don't have the OpenMP head
 #DEFINEOPTIONS += -D_TRUE_ACOS #Comment this out if you don't want to use an approximate arccosine
 DEFINEOPTIONS += -D_WITH_WEIGHTS #Comment this out if you want weighed galaxies
 
-#GSL options (local mac os X with homebrew)
-GSL_INC = /usr/local/Cellar/gsl/2.6/include
-GSL_LIB = /usr/local/Cellar/gsl/2.6/lib
-
-#GSL options on Nersc
+#GSL options for mac os X (with homebrew)
 #GSL_INC = /usr/local/Cellar/gsl/2.6/include
 #GSL_LIB = /usr/local/Cellar/gsl/2.6/lib
+
+#GSL options for Nersc (use : module show gsl)
+GSL_INC = /global/common/sw/cray/cnl7/haswell/gsl/2.5/gcc/8.2.0/sr445ay/include
+GSL_LIB = /global/common/sw/cray/cnl7/haswell/gsl/2.5/gcc/8.2.0/sr445ay/lib
 
 #CUDA options
 #Monopole - maximum radius in Mpc/h
