@@ -212,10 +212,10 @@ int nb_size;
 
 #ifdef _WITH_WEIGHTS
     stat=fscanf(fi,"%lE",&(R1R2[ii]));
-	R1R2[ii] = R1R2[ii] / nb_size
+	R1R2[ii] = R1R2[ii] / nb_size;
 #else //_WITH_WEIGHTS
     stat=fscanf(fi,"%llu",&(R1R2[ii]));
-	R1R2[ii] = R1R2[ii] / nb_size
+	R1R2[ii] = R1R2[ii] / nb_size;
 #endif //_WITH_WEIGHTS
   }
   fclose(fi);
