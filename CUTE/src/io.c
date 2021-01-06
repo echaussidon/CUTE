@@ -201,10 +201,21 @@ void read_RR(char *fname,histo_t *R1R2)
       if(stat!=1)
 	error_read_line(fname,ii+1);
     }
+
+int nb_size;
+#ifdef _HAVE_MPI
+	// get the number of processors to divided the number RR (MPI_SUM in MPI_REDUCE ..)
+	MPI_Comm_size(MPI_COMM_WORLD, &nb_size);
+#else //_HAVE_MPI
+	nb_size = 1.0;
+#endif //_HAVE_MPI
+
 #ifdef _WITH_WEIGHTS
     stat=fscanf(fi,"%lE",&(R1R2[ii]));
+	R1R2[ii] = R1R2[ii] / nb_size
 #else //_WITH_WEIGHTS
     stat=fscanf(fi,"%llu",&(R1R2[ii]));
+	R1R2[ii] = R1R2[ii] / nb_size
 #endif //_WITH_WEIGHTS
   }
   fclose(fi);
@@ -300,7 +311,6 @@ void write_CF(char *fname,
 		     sum_wd_2,sum_wd2_2,sum_wr_2,sum_wr2_2);
 	fprintf(fo,"%lE %lE ",th,corr);
 #ifdef _WITH_WEIGHTS
-	print_info("%lE ",R1R2[ii]);
 	fprintf(fo,"%lE %lE %lE %lE\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
 #else //_WITH_WEIGHTS
 	fprintf(fo,"%llu %llu %llu %llu\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
