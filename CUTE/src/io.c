@@ -282,7 +282,6 @@ void write_CF(char *fname,
 			    sum_wd_2,sum_wd2_2,sum_wr_2,sum_wr2_2);
 	fprintf(fo,"%lE %lE ",dz,corr);
 #ifdef _WITH_WEIGHTS
-	print_info("%lE ",R1R2[ii]);
 	fprintf(fo,"%lE %lE %lE %lE\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
 #else //_WITH_WEIGHTS
 	fprintf(fo,"%llu %llu %llu %llu\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
@@ -301,6 +300,7 @@ void write_CF(char *fname,
 		     sum_wd_2,sum_wd2_2,sum_wr_2,sum_wr2_2);
 	fprintf(fo,"%lE %lE ",th,corr);
 #ifdef _WITH_WEIGHTS
+	print_info("%lE ",R1R2[ii]);
 	fprintf(fo,"%lE %lE %lE %lE\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
 #else //_WITH_WEIGHTS
 	fprintf(fo,"%llu %llu %llu %llu\n",D1D2[ii],D1R2[ii],R1D2[ii],R1R2[ii]);
