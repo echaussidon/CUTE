@@ -52,7 +52,7 @@ static int read_line(FILE *fi,double *zz,double *cth,
   if(sr!=3) return 1;
   *weight=1;
 #endif //_WITH_WEIGHTS
-  
+
   //////
   // Modify here to add other formats
   // x0, x1, x2 are the first columns
@@ -108,7 +108,7 @@ static int read_line(FILE *fi,double *zz,double *cth,
     return 1;
   }
   (*phi)=wrap_phi((*phi));
-  
+
   return 0;
 }
 
@@ -140,7 +140,7 @@ static double make_CF(histo_t D1D2,histo_t D1R2,histo_t R1D2,histo_t R1R2,
     dd1r2=(double)(D1R2/norm_d1r2);
     dr1d2=(double)(R1D2/norm_r1d2);
     dr1r2=(double)(R1R2/norm_r1r2);
-    
+
     return (dd1d2-dd1r2-dr1d2+dr1r2)/dr1r2;
   }
 }
@@ -151,7 +151,7 @@ void read_RR(char *fname,histo_t *R1R2)
   // Writes correlation function to file fname
   FILE *fi;
   int ii;
-  
+
   int num_cols=-1;
   int num_rows=-1;
   if(corr_type==0) {
@@ -203,12 +203,14 @@ void read_RR(char *fname,histo_t *R1R2)
     }
 #ifdef _WITH_WEIGHTS
     stat=fscanf(fi,"%lE",&(R1R2[ii]));
+	print_info("%lE ",R1R2[ii]);
+
 #else //_WITH_WEIGHTS
     stat=fscanf(fi,"%llu",&(R1R2[ii]));
 #endif //_WITH_WEIGHTS
   }
   fclose(fi);
-    
+
   printf("\n");
 }
 
@@ -258,7 +260,7 @@ void write_CF(char *fname,
   if(NodeThis==0) {
     FILE *fo;
     int ii;
-    
+
     print_info("*** Writing output file ");
 #ifdef _VERBOSE
     print_info("%s ",fname);
@@ -273,7 +275,7 @@ void write_CF(char *fname,
       fo=fopen(oname,"w");
       if(fo==NULL) error_open_file(oname);
     }
-    
+
     if(corr_type==0) {
       for(ii=0;ii<nb_dz;ii++) {
 	double dz=(ii+0.5)/(nb_dz*i_dz_max);
@@ -356,7 +358,7 @@ void write_CF(char *fname,
 	  rr=pow(10,((ii+0.5)-nb_r)/n_logint+log_r_max);
 	else
 	  rr=(ii+0.5)/(nb_r*i_r_max);
-	
+
 	for(jj=0;jj<nb_mu;jj++) {
 	  double corr;
 	  double mu=(jj+0.5)/(nb_mu);
@@ -402,7 +404,7 @@ void write_CF(char *fname,
       }
     }
     fclose(fo);
-    
+
     printf("\n");
   }
 }
@@ -668,7 +670,7 @@ void process_binner(Binner binner)
     exit(1);
   }
 }
-  
+
 void read_run_params(char *fname)
 {
   //////
@@ -819,7 +821,7 @@ Catalog *read_catalog(char *fname,np_t *sum_w,np_t *sum_w2)
 
     if(st) error_read_line(fname,ii+1);
     z_mean+=zz;
-    
+
     if(zz<0) {
       fprintf(stderr,"Wrong redshift = %lf %d\n",zz,ii+1);
       exit(1);
@@ -900,7 +902,7 @@ Catalog_f read_catalog_f(char *fname,int *np)
     int st=read_line(fd,&zz,&cth,&phi,&dum_weight);
     if(st) error_read_line(fname,ii+1);
     z_mean+=zz;
-    
+
     sth=sqrt(1-cth*cth);
     if(corr_type!=1)
       rr=z2r(zz);
